@@ -1,5 +1,14 @@
-com/laurakovacic/sfgpetclinic/model/Vet.class
 com/laurakovacic/sfgpetclinic/model/Person.class
+com/laurakovacic/sfgpetclinic/services/map/PetServiceMap.class
+com/laurakovacic/sfgpetclinic/model/PetType.class
+com/laurakovacic/sfgpetclinic/services/map/OwnerServiceMap.class
+com/laurakovacic/sfgpetclinic/services/VetService.class
+com/laurakovacic/sfgpetclinic/services/map/AbstractMapService.class
+com/laurakovacic/sfgpetclinic/services/map/VetServiceMap.class
+com/laurakovacic/sfgpetclinic/model/BaseEntity.class
 com/laurakovacic/sfgpetclinic/model/Pet.class
 com/laurakovacic/sfgpetclinic/model/Owner.class
-com/laurakovacic/sfgpetclinic/model/PetType.class
+com/laurakovacic/sfgpetclinic/services/PetService.class
+com/laurakovacic/sfgpetclinic/model/Vet.class
+com/laurakovacic/sfgpetclinic/services/CrudService.class
+com/laurakovacic/sfgpetclinic/services/OwnerService.class

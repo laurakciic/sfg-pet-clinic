@@ -1,1 +1,5 @@
+com/laurakovacic/sfgpetclinic/controllers/IndexController.class
+com/laurakovacic/sfgpetclinic/controllers/VetController.class
+com/laurakovacic/sfgpetclinic/controllers/OwnerController.class
+com/laurakovacic/sfgpetclinic/bootstrap/DataInitializer.class
 com/laurakovacic/sfgpetclinic/SfgPetClinicApplication.class
