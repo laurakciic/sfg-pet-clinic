@@ -10,6 +10,8 @@ import com.laurakovacic.sfgpetclinic.services.VetService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+
 @Component
 public class DataInitializer implements CommandLineRunner {
     private final OwnerService ownerService;
@@ -25,24 +27,43 @@ public class DataInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         PetType dog = new PetType();
-        dog.setName("Doggo");
+        dog.setName("Dog");
         PetType savedDogPetType = petTypeService.save(dog);
 
         PetType cat = new PetType();
-        cat.setName("Freya");
+        cat.setName("Cat");
         PetType savedCatPetType = petTypeService.save(cat);
 
         Owner owner1 = new Owner();
         owner1.setFirstName("Laura");
         owner1.setLastName("Kovacic");
-
+        owner1.setAddress("12A Bickerer");
+        owner1.setCity("Miami");
+        owner1.setTelephone("12332189732");
         ownerService.save(owner1);
+
+        Pet laurasPet = new Pet();
+        laurasPet.setPetType(savedDogPetType);
+        laurasPet.setOwner(owner1);
+        laurasPet.setBirthDate(LocalDate.now());
+        laurasPet.setName("Buck");
+        owner1.getPets().add(laurasPet);
 
         Owner owner2 = new Owner();
         owner2.setFirstName("Luka");
         owner2.setLastName("Ronin");
-
+        owner2.setAddress("12A Bickerer");
+        owner2.setCity("Miami");
+        owner2.setTelephone("12872312378");
         ownerService.save(owner2);
+
+        Pet lukasPet = new Pet();
+        lukasPet.setPetType(savedCatPetType);
+        lukasPet.setOwner(owner2);
+        lukasPet.setBirthDate(LocalDate.now());
+        lukasPet.setName("Freya");
+        owner2.getPets().add(lukasPet);
+
         System.out.println("Loaded owners...");
 
         Vet vet1 = new Vet();
