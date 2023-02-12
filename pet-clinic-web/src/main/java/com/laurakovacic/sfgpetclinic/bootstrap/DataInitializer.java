@@ -63,11 +63,13 @@ public class DataInitializer implements CommandLineRunner {
         ownerService.save(owner1);
 
         Pet laurasPet = new Pet();
-        laurasPet.setPetType(savedDogPetType);
         laurasPet.setOwner(owner1);
+        laurasPet.setPetType(savedDogPetType);
         laurasPet.setBirthDate(LocalDate.now());
         laurasPet.setName("Buck");
+
         owner1.getPets().add(laurasPet);
+        ownerService.save(owner1);
 
         Owner owner2 = new Owner();
         owner2.setFirstName("Luka");
@@ -78,10 +80,11 @@ public class DataInitializer implements CommandLineRunner {
         ownerService.save(owner2);
 
         Pet lukasPet = new Pet();
-        lukasPet.setPetType(savedCatPetType);
         lukasPet.setOwner(owner2);
+        lukasPet.setPetType(savedCatPetType);
         lukasPet.setBirthDate(LocalDate.now());
         lukasPet.setName("Freya");
+
         owner2.getPets().add(lukasPet);
         ownerService.save(owner2);
 
@@ -90,6 +93,12 @@ public class DataInitializer implements CommandLineRunner {
         catVisit.setDate(LocalDate.now());
         catVisit.setDescription("Regular check");
         visitService.save(catVisit);
+
+        Visit dogVisit = new Visit();
+        dogVisit.setPet(laurasPet);
+        dogVisit.setDate(LocalDate.now());
+        dogVisit.setDescription("Regular POSTOP check");
+        visitService.save(dogVisit);
 
         System.out.println("Loaded owners...");
 
