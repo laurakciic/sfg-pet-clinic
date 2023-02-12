@@ -1,10 +1,7 @@
 package com.laurakovacic.sfgpetclinic.bootstrap;
 
 import com.laurakovacic.sfgpetclinic.model.*;
-import com.laurakovacic.sfgpetclinic.services.OwnerService;
-import com.laurakovacic.sfgpetclinic.services.PetTypeService;
-import com.laurakovacic.sfgpetclinic.services.SpecialtyService;
-import com.laurakovacic.sfgpetclinic.services.VetService;
+import com.laurakovacic.sfgpetclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -16,11 +13,14 @@ public class DataInitializer implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialtyService specialtyService;
-    public DataInitializer(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialtyService specialtyService) {
+    private final VisitService visitService;
+
+    public DataInitializer(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialtyService specialtyService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialtyService = specialtyService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -83,6 +83,13 @@ public class DataInitializer implements CommandLineRunner {
         lukasPet.setBirthDate(LocalDate.now());
         lukasPet.setName("Freya");
         owner2.getPets().add(lukasPet);
+        ownerService.save(owner2);
+
+        Visit catVisit = new Visit();
+        catVisit.setPet(lukasPet);
+        catVisit.setDate(LocalDate.now());
+        catVisit.setDescription("Regular check");
+        visitService.save(catVisit);
 
         System.out.println("Loaded owners...");
 
