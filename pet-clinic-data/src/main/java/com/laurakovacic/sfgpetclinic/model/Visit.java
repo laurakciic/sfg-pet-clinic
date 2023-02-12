@@ -12,7 +12,7 @@ public class Visit extends BaseEntity {
     @Column(name = "description")
     private String description;
     @ManyToOne
-    @JoinColumn(name = "pet_id")
+    @JoinColumn(name = "pet_id")            // pet_id property on the visits record
     private Pet pet;
 
     public LocalDate getDate() {
