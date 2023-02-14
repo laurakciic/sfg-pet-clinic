@@ -3,12 +3,10 @@ package com.laurakovacic.sfgpetclinic.bootstrap;
 import com.laurakovacic.sfgpetclinic.model.*;
 import com.laurakovacic.sfgpetclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.Collections;
-import java.util.Set;
 
 @Component
 public class DataInitializer implements CommandLineRunner {
@@ -124,7 +122,7 @@ public class DataInitializer implements CommandLineRunner {
                 .specialties(Collections.singleton(savedSurgery))
                 .build();
         vetService.save(vet2);
-        
+
         System.out.println("Loaded vets...");
     }
 }
