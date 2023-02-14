@@ -3,9 +3,12 @@ package com.laurakovacic.sfgpetclinic.bootstrap;
 import com.laurakovacic.sfgpetclinic.model.*;
 import com.laurakovacic.sfgpetclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.Set;
 
 @Component
 public class DataInitializer implements CommandLineRunner {
@@ -54,67 +57,74 @@ public class DataInitializer implements CommandLineRunner {
         dentistry.setDescription("Dentistry");
         Specialty savedDentistry = specialtyService.save(dentistry);
 
-        Owner owner1 = new Owner();
-        owner1.setFirstName("Laura");
-        owner1.setLastName("Kovacic");
-        owner1.setAddress("12A Bickerer");
-        owner1.setCity("Miami");
-        owner1.setTelephone("12332189732");
+        Owner owner1 = Owner.builder()
+                .firstName("Laura")
+                .lastName("Kovacic")
+                .address("12A Bickerer")
+                .city("Miami")
+                .telephone("12332189732")
+                .build();
         ownerService.save(owner1);
 
-        Pet laurasPet = new Pet();
-        laurasPet.setOwner(owner1);
-        laurasPet.setPetType(savedDogPetType);
-        laurasPet.setBirthDate(LocalDate.now());
-        laurasPet.setName("Buck");
+        Pet laurasPet = Pet.builder()
+                .owner(owner1)
+                .petType(savedDogPetType)
+                .birthDate(LocalDate.now())
+                .name("Buck")
+                .build();
 
         owner1.getPets().add(laurasPet);
         ownerService.save(owner1);
 
-        Owner owner2 = new Owner();
-        owner2.setFirstName("Luka");
-        owner2.setLastName("Ronin");
-        owner2.setAddress("12A Bickerer");
-        owner2.setCity("Miami");
-        owner2.setTelephone("12872312378");
+        Owner owner2 = Owner.builder()
+                .firstName("Luka")
+                .lastName("Roncevic")
+                .address("12A Bickerer")
+                .city("Miami")
+                .telephone("314313132")
+                .build();
         ownerService.save(owner2);
 
-        Pet lukasPet = new Pet();
-        lukasPet.setOwner(owner2);
-        lukasPet.setPetType(savedCatPetType);
-        lukasPet.setBirthDate(LocalDate.now());
-        lukasPet.setName("Freya");
+        Pet lukasPet = Pet.builder()
+                .owner(owner2)
+                .petType(savedCatPetType)
+                .birthDate(LocalDate.now())
+                .name("Zujka")
+                .build();
 
         owner2.getPets().add(lukasPet);
         ownerService.save(owner2);
 
-        Visit catVisit = new Visit();
-        catVisit.setPet(lukasPet);
-        catVisit.setDate(LocalDate.now());
-        catVisit.setDescription("Regular check");
+        Visit catVisit = Visit.builder()
+                .pet(lukasPet)
+                .date(LocalDate.now())
+                .description("Regular check")
+                .build();
         visitService.save(catVisit);
 
-        Visit dogVisit = new Visit();
-        dogVisit.setPet(laurasPet);
-        dogVisit.setDate(LocalDate.now());
-        dogVisit.setDescription("Regular POSTOP check");
+        Visit dogVisit = Visit.builder()
+                .pet(laurasPet)
+                .date(LocalDate.now())
+                .description("Postop check")
+                .build();
         visitService.save(dogVisit);
 
         System.out.println("Loaded owners...");
 
-        Vet vet1 = new Vet();
-        vet1.setFirstName("Domagoj");
-        vet1.setLastName("Petrovic");
-        vet1.getSpecialties().add(savedRadiology);
-
+        Vet vet1 = Vet.builder()
+                .firstName("Domagoj")
+                .lastName("Petrovic")
+                .specialties(Collections.singleton(savedRadiology))
+                .build();
         vetService.save(vet1);
 
-        Vet vet2 = new Vet();
-        vet2.setFirstName("Borna");
-        vet2.setLastName("Simunovic");
-        vet2.getSpecialties().add(savedSurgery);
-
+        Vet vet2 = Vet.builder()
+                .firstName("Borna")
+                .lastName("Simunovic")
+                .specialties(Collections.singleton(savedSurgery))
+                .build();
         vetService.save(vet2);
+        
         System.out.println("Loaded vets...");
     }
 }

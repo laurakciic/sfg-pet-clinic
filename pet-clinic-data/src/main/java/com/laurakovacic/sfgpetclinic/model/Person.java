@@ -2,7 +2,14 @@ package com.laurakovacic.sfgpetclinic.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@SuperBuilder(toBuilder=true)
 @MappedSuperclass
 public class Person extends BaseEntity {
     @Column(name = "first_name")
@@ -10,20 +17,4 @@ public class Person extends BaseEntity {
 
     @Column(name = "last_name")
     private String lastName;
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 }

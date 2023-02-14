@@ -1,9 +1,16 @@
 package com.laurakovacic.sfgpetclinic.model;
 
 import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@SuperBuilder(toBuilder=true)
 @Entity
 @Table(name = "visits")
 public class Visit extends BaseEntity {
@@ -13,34 +20,10 @@ public class Visit extends BaseEntity {
     private String description;
 
     /*
-    When Hibernate tries to persist the Visit it cannot find the Pet inside the database and it fails.
+    When Hibernate tries to persist the Visit it cannot find the Pet inside the database, and fails.
     We have to persist the Pet before the Visit, or it will fail.
      */
     @ManyToOne(cascade = CascadeType.PERSIST)   // the Persist action on the Visit is propagated to the Pet object and the error disapperas
     @JoinColumn(name = "pet_id")                // pet_id property on the visits record
     private Pet pet;
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Pet getPet() {
-        return pet;
-    }
-
-    public void setPet(Pet pet) {
-        this.pet = pet;
-    }
 }
